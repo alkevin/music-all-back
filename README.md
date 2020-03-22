@@ -12,21 +12,34 @@ This project was generated with [Spring Initializr](https://start.spring.io/)
 
 ## Badges
 
-------
-
 [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v2.0%20adopted-ff69b4.svg)](https://github.com/alkevin/music-all-back/blob/master/CODE_OF_CONDUCT.md)
 ![GitHub](https://img.shields.io/github/license/alkevin/music-all-back?style=plastic)
-
-------
 
 ## [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-black.svg)](https://sonarcloud.io/dashboard?id=alkevin_music-all-back)
 
 ------
 
-------
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=alkevin_music-all-back&metric=alert_status)](https://sonarcloud.io/dashboard?id=alkevin_music-all-back)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=alkevin_music-all-back&metric=code_smells)](https://sonarcloud.io/dashboard?id=alkevin_music-all-back)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=alkevin_music-all-back&metric=coverage)](https://sonarcloud.io/dashboard?id=alkevin_music-all-back)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=alkevin_music-all-back&metric=security_rating)](https://sonarcloud.io/dashboard?id=alkevin_music-all-back)
 
 ------
 
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=alkevin_music-all-back&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=alkevin_music-all-back)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=alkevin_music-all-back&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=alkevin_music-all-back)
+
+## Workflows
+
+------
+
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/alkevin/music-all-back/Test%20Maven%20Projects?label=Test%20Maven%20Projects&logo=github%20actions&style=plastic)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/alkevin/music-all-back/Build%20Maven%20Projects?label=Build%20Maven%20Projects&logo=github%20actions&style=plastic)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/alkevin/music-all-back/Compile%20Maven%20Projects?label=Compile%20Maven%20Projects&logo=github%20actions&style=plastic)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/alkevin/music-all-back/Release%20Maven%20Projects?label=Release%20Maven%20Projects&logo=github%20actions&style=plastic)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/alkevin/music-all-back/Deploy%20Maven%20Projects?label=Deploy%20Maven%20Projects&logo=github%20actions&style=plastic)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/alkevin/music-all-back/Quality%20gate%20-%20Sonar?label=Quality%20gate%20-%20Sonar&logo=github%20actions&style=plastic)
+</p>
 ------
 
 ## Try it
