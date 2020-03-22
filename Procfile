@@ -1,0 +1,1 @@
+web: java $JAVA_OPTS -jar target/music-all-back.jar -Dserver.port=$PORT $JAR_OPTS
