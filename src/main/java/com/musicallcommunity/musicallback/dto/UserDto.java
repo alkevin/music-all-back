@@ -4,6 +4,7 @@ import com.musicallcommunity.musicallback.model.AuthProvider;
 import com.musicallcommunity.musicallback.validation.ValidEmail;
 import com.musicallcommunity.musicallback.validation.ValidPassword;
 
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
