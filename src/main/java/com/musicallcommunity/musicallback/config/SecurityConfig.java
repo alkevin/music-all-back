@@ -1,10 +1,12 @@
 package com.musicallcommunity.musicallback.config;
 
+import com.musicallcommunity.musicallback.config.AppProperties;
 import com.musicallcommunity.musicallback.security.CustomAuthenticationProvider;
 import com.musicallcommunity.musicallback.security.CustomUserDetailsService;
 import com.musicallcommunity.musicallback.security.RestAuthenticationEntryPoint;
 import com.musicallcommunity.musicallback.security.TokenAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,6 +23,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import java.util.Objects;
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
@@ -29,6 +33,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
         prePostEnabled = true
 )
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private AppProperties appProperties;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -39,8 +45,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private RestAuthenticationEntryPoint unauthorizedHandler;
 
-    public SecurityConfig() {
+    public SecurityConfig(AppProperties appProperties) {
         super();
+        this.appProperties = appProperties;
     }
 
     @Bean
@@ -75,7 +82,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.headers().frameOptions().sameOrigin();
-        http.csrf().ignoringAntMatchers("/h2-console/**");
+        http.csrf().ignoringAntMatchers("/h2-console/**", appProperties.getH2().getPath()+"/**");
         http
                 .cors()
                 .and()
@@ -103,7 +110,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.css",
                         "/**/*.js")
                 .permitAll()
-                .antMatchers("/api/auth/**", "/h2-console/**", "/webjars/**", "/api/password/**")
+                .antMatchers("/api/auth/**", "/h2-console/**", appProperties.getH2().getPath()+"/**", "/webjars/**", "/api/password/**")
                 .permitAll()
                 //.antMatchers("/api/auth/signin").permitAll()
                 //.antMatchers("/api/translate").permitAll()
