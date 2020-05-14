@@ -9,6 +9,8 @@ public class AppProperties {
 
     private final Support support = new Support();
 
+    private final H2 h2 = new H2();
+
     public static class Auth {
         private String jwtSecret;
         private long jwtExpirationMsec;
@@ -42,10 +44,20 @@ public class AppProperties {
         }
     }
 
+    public static class H2 {
+        private String path;
+
+        public String getPath() { return path; }
+
+        public void setPath(String path) { this.path = path; }
+    }
+
     public Auth getAuth() {
         return auth;
     }
 
     public Support getSupport() {return support; }
+
+    public H2 getH2() {return h2;}
 
 }
