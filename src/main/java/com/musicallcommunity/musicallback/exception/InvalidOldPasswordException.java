@@ -1,4 +1,4 @@
-package com.musicallcommunity.musicallback;
+package com.musicallcommunity.musicallback.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
