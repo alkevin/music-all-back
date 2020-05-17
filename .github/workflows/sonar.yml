@@ -23,6 +23,6 @@ jobs:
       with:
         java-version: 11
     - name: SonarCloud Scan
-      run: mvn -B clean verify -Psonar -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+      run: mvn -B -DMAIL_HOST=${{MAIL_HOST}} -DMAIL_PORT=${{MAIL_PORT}} -DMAIL_USERNAME=${{MAIL_USERNAME}} -DMAIL_PASSWORD=${{MAIL_PASSWORD}} -DMAIL_PTL=${{MAIL_PTL}} -DMAIL_PTL_EBLE=${{MAIL_PTL_EBLE}} -DMAIL_CNT_TMOUT=${{MAIL_CNT_TMOUT}} clean verify -Psonar -Dsonar.login=${{ secrets.SONAR_TOKEN }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

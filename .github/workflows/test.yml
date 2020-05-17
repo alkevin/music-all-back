@@ -23,7 +23,7 @@ jobs:
       with:
         java-version: 11
     - name: test project 
-      run: mvn clean verify
+      run: mvn -DMAIL_HOST=${{MAIL_HOST}} -DMAIL_PORT=${{MAIL_PORT}} -DMAIL_USERNAME=${{MAIL_USERNAME}} -DMAIL_PASSWORD=${{MAIL_PASSWORD}} -DMAIL_PTL=${{MAIL_PTL}} -DMAIL_PTL_EBLE=${{MAIL_PTL_EBLE}} -DMAIL_CNT_TMOUT=${{MAIL_CNT_TMOUT}} clean verify
 
   test-integration: 
     runs-on: ubuntu-latest
@@ -44,6 +44,6 @@ jobs:
       with:
         java-version: 11
     - name: Maven Package
-      run: mvn -B clean package -DskipTests
+      run: mvn -B -DskipTests -DMAIL_HOST=${{MAIL_HOST}} -DMAIL_PORT=${{MAIL_PORT}} -DMAIL_USERNAME=${{MAIL_USERNAME}} -DMAIL_PASSWORD=${{MAIL_PASSWORD}} -DMAIL_PTL=${{MAIL_PTL}} -DMAIL_PTL_EBLE=${{MAIL_PTL_EBLE}} -DMAIL_CNT_TMOUT=${{MAIL_CNT_TMOUT}} clean package
     - name: Maven Verify
-      run: mvn -B clean verify -Pintegration-test
+      run: mvn -B -Pintegration-test -DMAIL_HOST=${{MAIL_HOST}} -DMAIL_PORT=${{MAIL_PORT}} -DMAIL_USERNAME=${{MAIL_USERNAME}} -DMAIL_PASSWORD=${{MAIL_PASSWORD}} -DMAIL_PTL=${{MAIL_PTL}} -DMAIL_PTL_EBLE=${{MAIL_PTL_EBLE}} -DMAIL_CNT_TMOUT=${{MAIL_CNT_TMOUT}} clean verify
