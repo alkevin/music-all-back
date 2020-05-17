@@ -112,10 +112,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers("/api/auth/**", "/h2-console/**", appProperties.getH2().getPath()+"/**", "/webjars/**", "/api/password/**")
                 .permitAll()
-                //.antMatchers("/api/auth/signin").permitAll()
+                .antMatchers("/api/auth/signin").permitAll()
                 //.antMatchers("/api/translate").permitAll()
-                //.antMatchers("/api/admin/users/**").hasAuthority("WRITE_PRIVILEGE")
-                //.antMatchers("/api/user/profile/**").hasAuthority("READ_PRIVILEGE")
+                .antMatchers("/api/admin/users/**").hasAuthority("WRITE_PRIVILEGE")
+                .antMatchers("/api/user/profile/**").hasAuthority("READ_PRIVILEGE")
                 .anyRequest()
                 .authenticated();
 
