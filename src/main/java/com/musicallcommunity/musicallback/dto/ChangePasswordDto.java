@@ -1,0 +1,27 @@
+package com.musicallcommunity.musicallback.dto;
+
+import com.musicallcommunity.musicallback.validation.ValidPassword;
+
+public class ChangePasswordDto {
+
+    private String oldPassword;
+
+    @ValidPassword
+    private String newPassword;
+
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public void setOldPassword(String oldPassword) {
+        this.oldPassword = oldPassword;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+}
