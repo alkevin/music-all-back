@@ -20,10 +20,13 @@
 		<maven-compiler.version>3.8.0</maven-compiler.version>
 		<org.mapstruct.version>1.3.1.Final</org.mapstruct.version>
 		<code.coverage.exclusions>
-			**/com/musicallcommunity/musicallback/controller/dto/**,
-			**/com/musicallcommunity/musicallback/entity/**,
-			**/com/musicallcommunity/musicallback/Application.java
+			**/com/musicallcommunity/musicallback/controller/**,
+			**/com/musicallcommunity/musicallback/model/**,
+			**/com/musicallcommunity/musicallback/dto/**,
+			**/com/musicallcommunity/musicallback/payload/**,
+			**/com/musicallcommunity/musicallback/MusicAllBAckApplication.java
 		</code.coverage.exclusions>
+
 	</properties>
 
 	<dependencies>
