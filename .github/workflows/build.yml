@@ -22,7 +22,7 @@ jobs:
       with:
         java-version: 11
     - name: Build & Test project 
-      run: mvn -f pom.xml -DMAIL_HOST=${{MAIL_HOST}} -DMAIL_PORT=${{MAIL_PORT}} -DMAIL_USERNAME=${{MAIL_USERNAME}} -DMAIL_PASSWORD=${{MAIL_PASSWORD}} -DMAIL_PTL=${{MAIL_PTL}} -DMAIL_PTL_EBLE=${{MAIL_PTL_EBLE}} -DMAIL_CNT_TMOUT=${{MAIL_CNT_TMOUT}} clean verify
+      run: mvn -f pom.xml -DMAIL_HOST=${{secrets.MAIL_HOST}} -DMAIL_PORT=${{secrets.MAIL_PORT}} -DMAIL_USERNAME=${{secrets.MAIL_USERNAME}} -DMAIL_PASSWORD=${{secrets.MAIL_PASSWORD}} -DMAIL_PTL=${{secrets.MAIL_PTL}} -DMAIL_PTL_EBLE=${{secrets.MAIL_PTL_EBLE}} -DMAIL_CNT_TMOUT=${{secrets.MAIL_CNT_TMOUT}} clean verify
     - name: Upload Maven build artifact
       uses: actions/upload-artifact@v1
       with:
