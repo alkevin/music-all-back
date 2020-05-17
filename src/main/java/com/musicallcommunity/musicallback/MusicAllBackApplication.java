@@ -1,13 +1,26 @@
 package com.musicallcommunity.musicallback;
 
-import org.springframework.boot.SpringApplication;
+import com.musicallcommunity.musicallback.config.AppProperties;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-public class MusicAllBackApplication {
+@EnableSwagger2
+@EnableConfigurationProperties(AppProperties.class)
+public class MusicAllBackApplication extends SpringBootServletInitializer {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MusicAllBackApplication.class, args);
+	@Override
+	protected SpringApplicationBuilder configure(
+			SpringApplicationBuilder builder) {
+		return builder.sources(MusicAllBackApplication.class);
 	}
 
+	public static void main(String[] args) {
+		new SpringApplicationBuilder()
+				.sources(MusicAllBackApplication.class)
+				.run(args);
+	}
 }
