@@ -106,7 +106,7 @@ jobs:
         echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
         echo ${GITHUB_REF}
     - name: Build the tagged image
-      env:
+      arg:
         MAIL_HOST: ${{ secrets.MAIL_HOST }}
         MAIL_PORT: ${{ secrets.MAIL_PORT }}
         MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
