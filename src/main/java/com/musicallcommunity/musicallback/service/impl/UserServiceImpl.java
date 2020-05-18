@@ -90,6 +90,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public User updateUser(User userToUpdate, UserDto current) throws ResourceNotFoundException {
+
         /**
          * We need to insert a business code here
          */
