@@ -45,7 +45,7 @@ INSERT INTO users (
     provider,
     provider_id)
 VALUES ( 'Jean', 'Luc', 'jean.luc@test.com',
-         '$2a$04$HwelVsNMMDXP4Kc/R9uI4ehDBTBTaPRvVcvryBJIM6jneJ64eM2E6',
+         '$2a$10$GJmv93WiauIGqpDmw/D.T.WGO6r.T3oI6CgC.cuvnkHGpKosh.v0m',
          '2019-12-14',
          '2019-12-14 18:42:00.996000000',
           true,
