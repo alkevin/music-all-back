@@ -22,7 +22,7 @@ public interface UserService {
 
     void delete(Long id);
 
-    User updateUser(User user, User current) throws ResourceNotFoundException;
+    User updateUser(User user, UserDto current) throws ResourceNotFoundException;
 
     User updateProfile(Long id, UserDto current) throws ResourceNotFoundException;
 

@@ -89,12 +89,12 @@ public class UserServiceImpl implements UserService {
      * @throws ResourceNotFoundException
      */
     @Override
-    public User updateUser(User userToUpdate, User current) throws ResourceNotFoundException {
+    public User updateUser(User userToUpdate, UserDto current) throws ResourceNotFoundException {
         /**
          * We need to insert a business code here
          */
         if (getById(userToUpdate.getId()) == null){
-            throw new ResourceNotFoundException("User", "id", current.getId());
+            throw new ResourceNotFoundException("User", "id", userToUpdate.getId());
         }
         userToUpdate.setFirstName(current.getFirstName());
         userToUpdate.setLastName(current.getLastName());
