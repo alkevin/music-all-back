@@ -81,6 +81,14 @@ jobs:
    - name: Install Docker
      run: curl -sSL https://get.docker.com/ | sh
    - name: Run hadolint
+     env:
+       MAIL_HOST: ${{ secrets.MAIL_HOST }}
+       MAIL_PORT: ${{ secrets.MAIL_PORT }}
+       MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+       MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+       MAIL_PTL: ${{ secrets.MAIL_PTL }}
+       MAIL_PTL_EBLE: ${{ secrets.MAIL_PTL_EBL }}
+       MAIL_CNT_TMOUT: ${{ secrets.MAIL_CNT_TMOUT }}
      run: docker run --rm -i hadolint/hadolint < Dockerfile 
 
   heroku:
@@ -92,7 +100,14 @@ jobs:
     - name: Login to DockerHub Registry
       run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USER }} --password-stdin
     - name: push to heroku
-      env :
+      env:
+        MAIL_HOST: ${{ secrets.MAIL_HOST }}
+        MAIL_PORT: ${{ secrets.MAIL_PORT }}
+        MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+        MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+        MAIL_PTL: ${{ secrets.MAIL_PTL }}
+        MAIL_PTL_EBLE: ${{ secrets.MAIL_PTL_EBL }}
+        MAIL_CNT_TMOUT: ${{ secrets.MAIL_CNT_TMOUT }}
         HEROKU_REGISTRY_URL: registry.heroku.com
         HEROKU_TOKEN : ${{ secrets.HEROKU_API_KEY }}
       run : |

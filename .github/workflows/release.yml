@@ -80,6 +80,14 @@ jobs:
    - name: Install Docker
      run: curl -sSL https://get.docker.com/ | sh
    - name: Run hadolint
+     env:
+       MAIL_HOST: ${{ secrets.MAIL_HOST }}
+       MAIL_PORT: ${{ secrets.MAIL_PORT }}
+       MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+       MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+       MAIL_PTL: ${{ secrets.MAIL_PTL }}
+       MAIL_PTL_EBLE: ${{ secrets.MAIL_PTL_EBL }}
+       MAIL_CNT_TMOUT: ${{ secrets.MAIL_CNT_TMOUT }}
      run: docker run --rm -i hadolint/hadolint < Dockerfile 
 
   publish:
@@ -98,8 +106,24 @@ jobs:
         echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
         echo ${GITHUB_REF}
     - name: Build the tagged image
+      env:
+        MAIL_HOST: ${{ secrets.MAIL_HOST }}
+        MAIL_PORT: ${{ secrets.MAIL_PORT }}
+        MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+        MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+        MAIL_PTL: ${{ secrets.MAIL_PTL }}
+        MAIL_PTL_EBLE: ${{ secrets.MAIL_PTL_EBL }}
+        MAIL_CNT_TMOUT: ${{ secrets.MAIL_CNT_TMOUT }}
       run: docker build . --file Dockerfile --target=build -t docker.pkg.github.com/${{ github.repository }}/music-all-back:${{steps.vars.outputs.tag}}
     - name: Build the latest image
+      env:
+        MAIL_HOST: ${{ secrets.MAIL_HOST }}
+        MAIL_PORT: ${{ secrets.MAIL_PORT }}
+        MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+        MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+        MAIL_PTL: ${{ secrets.MAIL_PTL }}
+        MAIL_PTL_EBLE: ${{ secrets.MAIL_PTL_EBL }}
+        MAIL_CNT_TMOUT: ${{ secrets.MAIL_CNT_TMOUT }}
       run: docker build . --file Dockerfile --target=build -t docker.pkg.github.com/${{ github.repository }}/music-all-back:latest
     - name: Publish artifact to Github Registry
       run: |
