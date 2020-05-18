@@ -114,7 +114,7 @@ jobs:
         MAIL_PTL: ${{ secrets.MAIL_PTL }}
         MAIL_PTL_EBLE: ${{ secrets.MAIL_PTL_EBL }}
         MAIL_CNT_TIMEOUT: ${{ secrets.MAIL_CNT_TIMOUT }}
-      run: docker build . --build-arg MAIL_HOST=$MAIL_HOST MAIL_PORT=$MAIL_PORT MAIL_USERNAME=$MAIL_USERNAME MAIL_PASSWORD=$MAIL_PASSWORD MAIL_PTL=$MAIL_PTL MAIL_PTL_EBLE=$MAIL_PTL_EBLE MAIL_CNT_TIMEOUT=$MAIL_CNT_TIMEOUT --file Dockerfile --target=build -t docker.pkg.github.com/${{ github.repository }}/music-all-back:${{steps.vars.outputs.tag}}
+      run: docker build --build-arg MAIL_HOST=$MAIL_HOST MAIL_PORT=$MAIL_PORT MAIL_USERNAME=$MAIL_USERNAME MAIL_PASSWORD=$MAIL_PASSWORD MAIL_PTL=$MAIL_PTL MAIL_PTL_EBLE=$MAIL_PTL_EBLE MAIL_CNT_TIMEOUT=$MAIL_CNT_TIMEOUT . --file Dockerfile --target=build -t docker.pkg.github.com/${{ github.repository }}/music-all-back:${{steps.vars.outputs.tag}}
     - name: Build the latest image
       env:
         MAIL_HOST: ${{ secrets.MAIL_HOST }}
