@@ -15,4 +15,4 @@ FROM adoptopenjdk/openjdk11:jdk-11.0.6_10-alpine
 COPY --from=build /usr/app/target/music-all-back.jar /usr/local/lib/music-all-back.jar
 WORKDIR /usr/app
 
-ENTRYPOINT ["java","-jar","/usr/local/lib/music-all-back.jar"]
+ENTRYPOINT ["java","${JAVA_OPTS}","-jar","/usr/local/lib/music-all-back.jar"]
