@@ -8,6 +8,13 @@ ARG MAIL_PASSWORD
 ARG MAIL_PTL
 ARG MAIL_PTL_EBLE
 ARG MAIL_CNT_TIMEOUT
+ENV MAIL_HOST=$MAIL_HOST
+ENV MAIL_PORT=$MAIL_PORT
+ENV MAIL_USERNAME=$MAIL_USERNAME
+ENV MAIL_PASSWORD=$MAIL_PASSWORD
+ENV MAIL_PTL=$MAIL_PTL
+ENV MAIL_PTL_EBLE=$MAIL_PTL_EBLE
+ENV MAIL_CNT_TIMEOUT=$MAIL_CNT_TIMEOUT
 
 RUN mvn -f /usr/app/pom.xml -DMAIL_HOST=${MAIL_HOST} -DMAIL_PORT=${MAIL_PORT} -DMAIL_USERNAME=${MAIL_USERNAME} -DMAIL_PASSWORD=${MAIL_PASSWORD} -DMAIL_PTL=${MAIL_PTL} -DMAIL_PTL_EBLE=${MAIL_PTL_EBLE} -DMAIL_CNT_TIMEOUT=${MAIL_CNT_TIMEOUT} clean install
 
@@ -15,4 +22,4 @@ FROM adoptopenjdk/openjdk11:jdk-11.0.6_10-alpine
 COPY --from=build /usr/app/target/music-all-back.jar /usr/local/lib/music-all-back.jar
 WORKDIR /usr/app
 
-ENTRYPOINT ["java","${JAVA_OPTS}","-jar","/usr/local/lib/music-all-back.jar"]
+ENTRYPOINT ["java","-jar","/usr/local/lib/music-all-back.jar"]

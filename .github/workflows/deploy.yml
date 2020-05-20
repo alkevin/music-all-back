@@ -89,7 +89,15 @@ jobs:
        MAIL_PTL: ${{ secrets.MAIL_PTL }}
        MAIL_PTL_EBLE: ${{ secrets.MAIL_PTL_EBL }}
        MAIL_CNT_TMOUT: ${{ secrets.MAIL_CNT_TMOUT }}
-     run: docker run --rm -i hadolint/hadolint < Dockerfile 
+     run: |
+       export MAIL_HOST=$MAIL_HOST
+       export MAIL_PORT=$MAIL_PORT
+       export MAIL_USERNAME=$MAIL_USERNAME
+       export MAIL_PASSWORD=$MAIL_PASSWORD
+       export MAIL_PTL=$MAIL_PTL
+       export MAIL_PTL_EBLE=$MAIL_PTL_EBLE
+       export MAIL_CNT_TMOUT=$MAIL_CNT_TMOUT
+       docker run --rm -i hadolint/hadolint < Dockerfile
 
   heroku:
     name: Deploy to Heroku from github registry
