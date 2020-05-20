@@ -45,7 +45,7 @@ jobs:
     - name: Maven Package
       run: mvn -B -DskipTests -DMAIL_HOST=${{secrets.MAIL_HOST}} -DMAIL_PORT=${{secrets.MAIL_PORT}} -DMAIL_USERNAME=${{secrets.MAIL_USERNAME}} -DMAIL_PASSWORD=${{secrets.MAIL_PASSWORD}} -DMAIL_PTL=${{secrets.MAIL_PTL}} -DMAIL_PTL_EBLE=${{secrets.MAIL_PTL_EBLE}} -DMAIL_CNT_TMOUT=${{secrets.MAIL_CNT_TMOUT}} clean package
     - name: Maven Verify
-      run: mvn -B -Pintegration-test -DMAIL_HOST=${{MAIL_HOST}} -DMAIL_PORT=${{MAIL_PORT}} -DMAIL_USERNAME=${{MAIL_USERNAME}} -DMAIL_PASSWORD=${{MAIL_PASSWORD}} -DMAIL_PTL=${{MAIL_PTL}} -DMAIL_PTL_EBLE=${{MAIL_PTL_EBLE}} -DMAIL_CNT_TMOUT=${{MAIL_CNT_TMOUT}} clean verify
+      run: mvn -B -Pintegration-test -DMAIL_HOST=${{secrets.MAIL_HOST}} -DMAIL_PORT=${{secrets.MAIL_PORT}} -DMAIL_USERNAME=${{secrets.MAIL_USERNAME}} -DMAIL_PASSWORD=${{secrets.MAIL_PASSWORD}} -DMAIL_PTL=${{secrets.MAIL_PTL}} -DMAIL_PTL_EBLE=${{secrets.MAIL_PTL_EBLE}} -DMAIL_CNT_TMOUT=${{secrets.MAIL_CNT_TMOUT}} clean verify
 
   build:
     name: Build Maven Project
@@ -81,7 +81,23 @@ jobs:
    - name: Install Docker
      run: curl -sSL https://get.docker.com/ | sh
    - name: Run hadolint
-     run: docker run --rm -i hadolint/hadolint < Dockerfile 
+     env:
+       MAIL_HOST: ${{ secrets.MAIL_HOST }}
+       MAIL_PORT: ${{ secrets.MAIL_PORT }}
+       MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+       MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+       MAIL_PTL: ${{ secrets.MAIL_PTL }}
+       MAIL_PTL_EBLE: ${{ secrets.MAIL_PTL_EBL }}
+       MAIL_CNT_TMOUT: ${{ secrets.MAIL_CNT_TMOUT }}
+     run: |
+       export MAIL_HOST=$MAIL_HOST
+       export MAIL_PORT=$MAIL_PORT
+       export MAIL_USERNAME=$MAIL_USERNAME
+       export MAIL_PASSWORD=$MAIL_PASSWORD
+       export MAIL_PTL=$MAIL_PTL
+       export MAIL_PTL_EBLE=$MAIL_PTL_EBLE
+       export MAIL_CNT_TMOUT=$MAIL_CNT_TMOUT
+       docker run --rm -i hadolint/hadolint < Dockerfile
 
   heroku:
     name: Deploy to Heroku from github registry
@@ -92,7 +108,14 @@ jobs:
     - name: Login to DockerHub Registry
       run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USER }} --password-stdin
     - name: push to heroku
-      env :
+      env:
+        MAIL_HOST: ${{ secrets.MAIL_HOST }}
+        MAIL_PORT: ${{ secrets.MAIL_PORT }}
+        MAIL_USERNAME: ${{ secrets.MAIL_USERNAME }}
+        MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+        MAIL_PTL: ${{ secrets.MAIL_PTL }}
+        MAIL_PTL_EBLE: ${{ secrets.MAIL_PTL_EBL }}
+        MAIL_CNT_TMOUT: ${{ secrets.MAIL_CNT_TMOUT }}
         HEROKU_REGISTRY_URL: registry.heroku.com
         HEROKU_TOKEN : ${{ secrets.HEROKU_API_KEY }}
       run : |
