@@ -38,4 +38,5 @@ public interface UserService {
 
     boolean isAdmin(Long id,String mail) throws ResourceNotFoundException;
 
+    UserDto fetchUserAfterAuth(String mail) throws ResourceNotFoundException;
 }

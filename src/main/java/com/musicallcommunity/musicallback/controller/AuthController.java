@@ -1,15 +1,13 @@
 package com.musicallcommunity.musicallback.controller;
 
-import com.musicallcommunity.musicallback.payload.SignUpRequest;
+import com.musicallcommunity.musicallback.payload.*;
 import com.musicallcommunity.musicallback.dto.util.UserUtil;
-import com.musicallcommunity.musicallback.payload.SignInRequest;
 import com.musicallcommunity.musicallback.dto.UserDto;
 import com.musicallcommunity.musicallback.exception.AlreadyExistException;
 import com.musicallcommunity.musicallback.exception.ResourceNotFoundException;
 import com.musicallcommunity.musicallback.model.User;
-import com.musicallcommunity.musicallback.payload.ApiResponse;
-import com.musicallcommunity.musicallback.payload.JwtResponse;
 import com.musicallcommunity.musicallback.service.AuthenticationService;
+import com.musicallcommunity.musicallback.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,22 +29,27 @@ public class AuthController {
     private final Logger LOGGER = LoggerFactory.getLogger(AuthController.class);
 
     private AuthenticationService authenticationService;
+    private UserService userService;
     private MessageSource messages;
 
     @Autowired
-    public AuthController(AuthenticationService authenticationService, MessageSource messages) {
+    public AuthController(AuthenticationService authenticationService, UserService userService, MessageSource messages) {
         this.authenticationService = authenticationService;
+        this.userService = userService;
         this.messages = messages;
     }
 
     @PostMapping(value = "/signin", consumes = {MediaType.APPLICATION_JSON_VALUE},
             produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public ApiResponse<JwtResponse> createJwtAuth(final HttpServletRequest request, @RequestBody @Valid SignInRequest signInRequest) throws ResourceNotFoundException, AlreadyExistException {
+    public ApiResponse<LoginResponse> createJwtAuth(final HttpServletRequest request, @RequestBody @Valid SignInRequest signInRequest) throws ResourceNotFoundException, AlreadyExistException {
         Locale locale = request.getLocale();
-        JwtResponse token = new JwtResponse(authenticationService.authenticateJwt(signInRequest));
+        String token = authenticationService.authenticateJwt(signInRequest);
         LOGGER.info("Generate token to authenticate");
-        return new ApiResponse<>(HttpStatus.OK.value(), messages.getMessage("token.genSuc", null, locale), token);
+        UserDto userDto = userService.fetchUserAfterAuth(signInRequest.getMail());
+        userDto.setConnected(true);
+        LoginResponse response = new LoginResponse(userDto,token);
+        return new ApiResponse<>(HttpStatus.OK.value(), messages.getMessage("token.genSuc", null, locale), response);
     }
 
     @PostMapping(value = "/signup", consumes = {MediaType.APPLICATION_JSON_VALUE},

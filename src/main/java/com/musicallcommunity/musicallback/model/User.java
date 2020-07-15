@@ -51,6 +51,9 @@ public class User {
     @Column
     private boolean enabled;
 
+    @Column
+    private boolean connected;
+
     @Enumerated(EnumType.STRING)
     private AuthProvider provider = AuthProvider.local;
 
@@ -60,6 +63,7 @@ public class User {
     public User(){
         super();
         this.enabled = false;
+        this.connected = false;
     }
 
     public User(UserDto userDto) {
@@ -157,6 +161,14 @@ public class User {
         this.providerId = providerId;
     }
 
+    public boolean getConnected() {
+        return connected;
+    }
+
+    public void setConnected(boolean connected) {
+        this.connected = connected;
+    }
+
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
@@ -164,7 +176,7 @@ public class User {
                 .append(lastName).append(", mail=").append(mail).append(", password=").append(password)
                 .append(", roles=").append(roles).append(", creationDate=").append(creationDate).append(", modificationDate=")
                 .append(modificationDate).append(", enabled=").append(enabled).append(", provider=").append(provider)
-                .append(", providerId=").append(providerId).append("]");
+                .append(", providerId=").append(providerId).append(", connected=").append(connected).append("]");
         return builder.toString();
     }
 

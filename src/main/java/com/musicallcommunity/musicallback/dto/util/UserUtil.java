@@ -18,6 +18,7 @@ public class UserUtil {
                 .roles(RoleUtil.toRoles(user.getRoles()))
                 .provider((user.getProvider()))
                 .providerId(user.getProviderId())
+                .connected(user.getConnected())
                 .build();
     }
 

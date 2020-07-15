@@ -30,6 +30,8 @@ public class UserDto {
 
     private String providerId;
 
+    private boolean connected;
+
 
     public String getFirstName() {
         return firstName;
@@ -74,6 +76,14 @@ public class UserDto {
     public void setProviderId(String providerId) {
         this.providerId = providerId;
 
+    }
+
+    public boolean getConnected() {
+        return connected;
+    }
+
+    public void setConnected(boolean connected) {
+        this.connected = connected;
     }
 
     @Override
@@ -123,6 +133,11 @@ public class UserDto {
 
         public UserDtoBuilder providerId(String providerId) {
             userDto.setProviderId(providerId);
+            return this;
+        }
+
+        public UserDtoBuilder connected(boolean connected) {
+            userDto.setConnected(connected);
             return this;
         }
 

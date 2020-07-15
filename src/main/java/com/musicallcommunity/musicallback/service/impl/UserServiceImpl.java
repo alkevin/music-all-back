@@ -1,6 +1,7 @@
 package com.musicallcommunity.musicallback.service.impl;
 
 import com.musicallcommunity.musicallback.dto.UserDto;
+import com.musicallcommunity.musicallback.dto.util.UserUtil;
 import com.musicallcommunity.musicallback.exception.ForbiddenException;
 import com.musicallcommunity.musicallback.exception.ResourceNotFoundException;
 import com.musicallcommunity.musicallback.model.PasswordResetToken;
@@ -169,5 +170,11 @@ public class UserServiceImpl implements UserService {
             isAdmin = true;
         }
         return isAdmin;
+    }
+
+    @Override
+    public UserDto fetchUserAfterAuth(String mail) throws ResourceNotFoundException {
+        User user = getByMail(mail);
+        return UserUtil.toUser(user);
     }
 }

@@ -31,6 +31,7 @@ CREATE TABLE users
     enabled           boolean null,
     provider          varchar(255) null,
     provider_id       bigint null,
+    connected         boolean null,
     UNIQUE key uk_mail (mail)
 );
 

@@ -43,14 +43,16 @@ INSERT INTO users (
     modification_date,
     enabled,
     provider,
-    provider_id)
+    provider_id,
+    connected)
 VALUES ( 'Jean', 'Luc', 'jean.luc@test.com',
          '$2a$10$GJmv93WiauIGqpDmw/D.T.WGO6r.T3oI6CgC.cuvnkHGpKosh.v0m',
          '2019-12-14',
          '2019-12-14 18:42:00.996000000',
           true,
          'local',
-         'local_ID');
+         'local_ID',
+          false);
 
 INSERT INTO users (
     first_name,
@@ -61,14 +63,16 @@ INSERT INTO users (
     modification_date,
     enabled,
     provider,
-    provider_id)
+    provider_id,
+    connected)
 VALUES ( 'Micheal', 'Marie', 'micheal.marie@test.com',
          '$2a$04$5zLXcpOeuKyZZPbDa9CZ6uFloNQi3RjKD30l2rQuz8M/.wEl5D9fS',
          '2019-12-14',
          '2019-12-14 18:43:00.996000000',
           true,
          'local',
-         'local_ID');
+         'local_ID',
+          false);
 
 -- Give the admin/user role
 
