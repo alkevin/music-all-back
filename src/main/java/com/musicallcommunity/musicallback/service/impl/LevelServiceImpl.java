@@ -1,10 +1,7 @@
 package com.musicallcommunity.musicallback.service.impl;
 
 import com.musicallcommunity.musicallback.exception.ResourceNotFoundException;
-import com.musicallcommunity.musicallback.model.Instrument;
 import com.musicallcommunity.musicallback.model.Level;
-import com.musicallcommunity.musicallback.model.LevelName;
-import com.musicallcommunity.musicallback.repository.InstrumentRepository;
 import com.musicallcommunity.musicallback.repository.LevelRepository;
 import com.musicallcommunity.musicallback.service.LevelService;
 import org.slf4j.Logger;

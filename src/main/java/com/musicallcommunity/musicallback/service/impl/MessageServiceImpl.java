@@ -1,9 +1,7 @@
 package com.musicallcommunity.musicallback.service.impl;
 
-import com.musicallcommunity.musicallback.dto.UserDto;
 import com.musicallcommunity.musicallback.exception.ResourceNotFoundException;
 import com.musicallcommunity.musicallback.model.*;
-import com.musicallcommunity.musicallback.payload.SignUpRequest;
 import com.musicallcommunity.musicallback.repository.ConversationRepository;
 import com.musicallcommunity.musicallback.repository.MessageRepository;
 import com.musicallcommunity.musicallback.service.MessageService;
@@ -14,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 @Service(value = "messageService")

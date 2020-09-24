@@ -1,6 +1,5 @@
 package com.musicallcommunity.musicallback.repository.impl;
 
-import com.musicallcommunity.musicallback.model.Message;
 import com.musicallcommunity.musicallback.model.UserFriend;
 import com.musicallcommunity.musicallback.repository.UserFriendRepository;
 

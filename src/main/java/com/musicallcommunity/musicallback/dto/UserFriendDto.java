@@ -1,7 +1,6 @@
 package com.musicallcommunity.musicallback.dto;
 
 import com.musicallcommunity.musicallback.model.FriendStatus;
-import com.musicallcommunity.musicallback.model.User;
 
 import javax.validation.constraints.NotNull;
 

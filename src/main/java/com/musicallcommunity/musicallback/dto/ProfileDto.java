@@ -1,6 +1,5 @@
 package com.musicallcommunity.musicallback.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.musicallcommunity.musicallback.model.GenderChar;
 import com.sun.istack.NotNull;
 

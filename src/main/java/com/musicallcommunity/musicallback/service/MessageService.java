@@ -5,7 +5,6 @@ import com.musicallcommunity.musicallback.exception.ResourceNotFoundException;
 import com.musicallcommunity.musicallback.model.Conversation;
 import com.musicallcommunity.musicallback.model.Message;
 import com.musicallcommunity.musicallback.model.User;
-import com.musicallcommunity.musicallback.payload.SignUpRequest;
 
 import java.util.List;
 

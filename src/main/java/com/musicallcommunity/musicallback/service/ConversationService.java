@@ -3,7 +3,6 @@ package com.musicallcommunity.musicallback.service;
 import com.musicallcommunity.musicallback.exception.AlreadyExistException;
 import com.musicallcommunity.musicallback.exception.ResourceNotFoundException;
 import com.musicallcommunity.musicallback.model.Conversation;
-import com.musicallcommunity.musicallback.model.User;
 
 import java.util.List;
 

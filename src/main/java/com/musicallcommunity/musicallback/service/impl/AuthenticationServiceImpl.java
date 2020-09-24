@@ -1,7 +1,6 @@
 package com.musicallcommunity.musicallback.service.impl;
 
 import com.musicallcommunity.musicallback.dto.UserDto;
-import com.musicallcommunity.musicallback.model.Privilege;
 import com.musicallcommunity.musicallback.payload.LoginResponse;
 import com.musicallcommunity.musicallback.payload.SignUpRequest;
 import com.musicallcommunity.musicallback.payload.SignInRequest;
@@ -22,9 +21,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service(value = "authenticationService")
 public class AuthenticationServiceImpl implements AuthenticationService{

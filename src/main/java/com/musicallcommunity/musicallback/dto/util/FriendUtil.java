@@ -1,8 +1,6 @@
 package com.musicallcommunity.musicallback.dto.util;
 
 import com.musicallcommunity.musicallback.dto.FriendDto;
-import com.musicallcommunity.musicallback.dto.UserDto;
-import com.musicallcommunity.musicallback.model.Role;
 
 import java.util.ArrayList;
 import java.util.Collection;

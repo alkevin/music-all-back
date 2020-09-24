@@ -1,14 +1,9 @@
 package com.musicallcommunity.musicallback.controller.admin;
 
-import com.musicallcommunity.musicallback.dto.InstrumentDto;
 import com.musicallcommunity.musicallback.dto.ProfileDto;
-import com.musicallcommunity.musicallback.dto.util.InstrumentUtil;
 import com.musicallcommunity.musicallback.dto.util.ProfileUtil;
-import com.musicallcommunity.musicallback.model.Instrument;
 import com.musicallcommunity.musicallback.model.Profile;
-import com.musicallcommunity.musicallback.service.InstrumentService;
 import com.musicallcommunity.musicallback.service.ProfileService;
-import com.musicallcommunity.musicallback.service.UserService;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

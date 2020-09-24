@@ -1,8 +1,6 @@
 package com.musicallcommunity.musicallback.controller.admin;
 
-import com.musicallcommunity.musicallback.dto.ConversationDto;
 import com.musicallcommunity.musicallback.dto.UserDto;
-import com.musicallcommunity.musicallback.dto.util.ConversationUtil;
 import com.musicallcommunity.musicallback.dto.util.UserUtil;
 import com.musicallcommunity.musicallback.exception.ResourceNotFoundException;
 import com.musicallcommunity.musicallback.model.User;

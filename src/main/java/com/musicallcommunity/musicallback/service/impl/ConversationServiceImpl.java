@@ -2,7 +2,6 @@ package com.musicallcommunity.musicallback.service.impl;
 
 import com.musicallcommunity.musicallback.exception.ResourceNotFoundException;
 import com.musicallcommunity.musicallback.model.Conversation;
-import com.musicallcommunity.musicallback.model.User;
 import com.musicallcommunity.musicallback.repository.ConversationRepository;
 import com.musicallcommunity.musicallback.service.ConversationService;
 import org.slf4j.Logger;

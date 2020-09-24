@@ -1,17 +1,10 @@
 package com.musicallcommunity.musicallback.controller;
 
 import com.musicallcommunity.musicallback.controller.admin.UserController;
-import com.musicallcommunity.musicallback.dto.MessageDto;
 import com.musicallcommunity.musicallback.dto.UserDto;
-import com.musicallcommunity.musicallback.dto.util.MessageUtil;
 import com.musicallcommunity.musicallback.dto.util.UserUtil;
-import com.musicallcommunity.musicallback.exception.AlreadyExistException;
 import com.musicallcommunity.musicallback.exception.ResourceNotFoundException;
-import com.musicallcommunity.musicallback.model.Conversation;
-import com.musicallcommunity.musicallback.model.Message;
 import com.musicallcommunity.musicallback.model.User;
-import com.musicallcommunity.musicallback.model.UserFriend;
-import com.musicallcommunity.musicallback.payload.MessageRequest;
 import com.musicallcommunity.musicallback.service.UserFriendService;
 import com.musicallcommunity.musicallback.service.UserService;
 import org.slf4j.Logger;

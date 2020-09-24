@@ -1,7 +1,6 @@
 package com.musicallcommunity.musicallback.repository.impl;
 
 import com.musicallcommunity.musicallback.model.Conversation;
-import com.musicallcommunity.musicallback.model.Message;
 import com.musicallcommunity.musicallback.repository.ConversationRepository;
 
 import javax.persistence.EntityManager;

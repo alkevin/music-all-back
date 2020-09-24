@@ -2,7 +2,6 @@ package com.musicallcommunity.musicallback.service.impl;
 
 import com.musicallcommunity.musicallback.dto.InstrumentDto;
 import com.musicallcommunity.musicallback.dto.ProfileDto;
-import com.musicallcommunity.musicallback.dto.UserDto;
 import com.musicallcommunity.musicallback.exception.ResourceNotFoundException;
 import com.musicallcommunity.musicallback.model.*;
 import com.musicallcommunity.musicallback.repository.InstrumentRepository;
@@ -13,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;

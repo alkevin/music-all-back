@@ -1,14 +1,10 @@
 package com.musicallcommunity.musicallback.dto.util;
 
-import com.musicallcommunity.musicallback.dto.ConversationDto;
 import com.musicallcommunity.musicallback.dto.MessageDto;
-import com.musicallcommunity.musicallback.model.Conversation;
 import com.musicallcommunity.musicallback.model.Message;
 
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 public class MessageUtil {

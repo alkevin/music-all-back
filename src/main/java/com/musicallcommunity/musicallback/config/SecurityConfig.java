@@ -24,6 +24,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import javax.servlet.*;
+
 
 @Configuration
 @EnableWebSecurity
@@ -79,9 +81,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return authProvider;
     }
 
+    @Bean
+    public Filter httpsEnforcerFilter(){
+        return new HttpsEnforcer();
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.headers().frameOptions().sameOrigin();
+        http.requiresChannel()
+                .requestMatchers(r -> r.getHeader("X-Forwarded-Proto") != null)
+                .requiresSecure();
         http.csrf().ignoringAntMatchers("/h2-console/**", appProperties.getH2().getPath()+"/**");
         http
                 .cors()
