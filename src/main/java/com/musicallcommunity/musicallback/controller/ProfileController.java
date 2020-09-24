@@ -2,23 +2,38 @@ package com.musicallcommunity.musicallback.controller;
 
 import com.musicallcommunity.musicallback.controller.admin.UserController;
 import com.musicallcommunity.musicallback.dto.ChangePasswordDto;
+import com.musicallcommunity.musicallback.dto.MessageDto;
+import com.musicallcommunity.musicallback.dto.ProfileDto;
 import com.musicallcommunity.musicallback.dto.UserDto;
+import com.musicallcommunity.musicallback.dto.util.MessageUtil;
 import com.musicallcommunity.musicallback.dto.util.UserUtil;
+import com.musicallcommunity.musicallback.exception.AlreadyExistException;
 import com.musicallcommunity.musicallback.exception.InvalidOldPasswordException;
+import com.musicallcommunity.musicallback.exception.ResourceNotFoundException;
+import com.musicallcommunity.musicallback.model.Conversation;
+import com.musicallcommunity.musicallback.model.Message;
+import com.musicallcommunity.musicallback.model.Profile;
 import com.musicallcommunity.musicallback.model.User;
 import com.musicallcommunity.musicallback.payload.ApiResponse;
+import com.musicallcommunity.musicallback.payload.LoginResponse;
+import com.musicallcommunity.musicallback.payload.MessageRequest;
+import com.musicallcommunity.musicallback.payload.SignInRequest;
+import com.musicallcommunity.musicallback.service.AuthenticationService;
+import com.musicallcommunity.musicallback.service.ProfileService;
 import com.musicallcommunity.musicallback.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @Validated
@@ -28,34 +43,33 @@ public class ProfileController {
     private final static Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
     private UserService userService;
+    private AuthenticationService authenticationService;
+    private ProfileService profileService;
 
     @Autowired
-    public ProfileController(UserService userService) {
+    public ProfileController(UserService userService, AuthenticationService authenticationService
+                            , ProfileService profileService) {
         this.userService = userService;
+        this.authenticationService = authenticationService;
+        this.profileService = profileService;
     }
 
     @GetMapping(value = "/me", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public ApiResponse<UserDto> getProfile() {
+    public ResponseEntity<UserDto> getProfile() {
         LOGGER.info("Fetching Profile with user load by contexte {} : ",
                 ((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
 
         String userMail = ((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername();
-        User user = userService.getByMail(userMail);
-        UserDto profile = UserUtil.toUser(user);
+        UserDto userDto = userService.fetchUserAfterAuth(userMail);
 
-        if (user == null) {
-            LOGGER.error("Profile with user mail {} is not found.", userMail);
-            return new ApiResponse<>(HttpStatus.NOT_FOUND.value(), "Profile with user mail " + userMail
-                    + " not found.", profile);
-        }
-        return new ApiResponse<>(HttpStatus.OK.value(), "Profile with user mail " + userMail
-                + " fetched successfully.", profile);
+
+        return new ResponseEntity<>(userDto,HttpStatus.OK);
     }
 
-    @PutMapping(value = "/update", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @PutMapping(value = "/update-user", produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    public ApiResponse<UserDto> updateProfile(@Valid @RequestBody UserDto userDto) {
+    public ApiResponse<UserDto> updateUser(@Valid @RequestBody UserDto userDto) {
         LOGGER.info("Fetching User with context for Update his profile {}",
                 ((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
 
@@ -65,9 +79,29 @@ public class ProfileController {
         if (userService.isAdmin(user.getId(),user.getMail())) {
             return new ApiResponse<>(HttpStatus.FORBIDDEN.value(), "You can not update the admin", userDt);
         } else {
-            User userUpdated = userService.updateProfile(user.getId(), userDto);
+            User userUpdated = userService.updateUser(user.getId(), userDto);
             userDt = UserUtil.toUser(userUpdated);
         }
+
+        return new ApiResponse<>(HttpStatus.OK.value(), "User updated with success", userDt);
+    }
+
+    @PutMapping(value = "/update-profile", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ResponseBody
+    public ApiResponse<UserDto> updateProfile(@Valid @RequestBody ProfileDto profileDto) {
+        LOGGER.info("Fetching User with context for Update his profile {}",
+                ((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
+
+        User user = userService.getByMail(((UserDetails)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUsername());
+        UserDto userDt = new UserDto();
+        if (userService.isAdmin(user.getId(),user.getMail())) {
+            return new ApiResponse<>(HttpStatus.FORBIDDEN.value(), "You can not update the admin", userDt);
+        } else {
+            profileService.updateProfile(user.getProfile(), profileDto);
+        }
+
+        user = userService.getByMail(user.getMail());
+        userDt = UserUtil.toUser(user);
 
         return new ApiResponse<>(HttpStatus.OK.value(), "User updated with success", userDt);
     }

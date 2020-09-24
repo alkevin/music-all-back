@@ -14,8 +14,11 @@ public class RoleUtil {
             return null;
         }
 
-        return RoleDto.RoleDtoBuilder.builder().privileges(PrivilegeUtil.toPrivileges(role.getPrivileges()))
-                .name(role.getName().name()).authority(role.getAuthority()).build();
+        return RoleDto.RoleDtoBuilder.builder()
+                .privileges(PrivilegeUtil.toPrivileges(role.getPrivileges()))
+                .name(role.getName().name())
+                .authority(role.getAuthority())
+                .build();
     }
 
     public static List<RoleDto> toRoles(final Collection<Role> roles) {

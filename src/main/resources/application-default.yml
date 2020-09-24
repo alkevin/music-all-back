@@ -9,7 +9,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:h2:mem:test;mode=mysql
+    url: jdbc:h2:mem:test;mode=mysql;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false
     driverClassName: org.h2.Driver
     username: test
     password: test

@@ -1,14 +1,13 @@
 package com.musicallcommunity.musicallback.service.impl;
 
+import com.musicallcommunity.musicallback.dto.UserDto;
+import com.musicallcommunity.musicallback.model.Privilege;
+import com.musicallcommunity.musicallback.payload.LoginResponse;
 import com.musicallcommunity.musicallback.payload.SignUpRequest;
 import com.musicallcommunity.musicallback.payload.SignInRequest;
 import com.musicallcommunity.musicallback.exception.AlreadyExistException;
 import com.musicallcommunity.musicallback.exception.ResourceNotFoundException;
-import com.musicallcommunity.musicallback.model.AuthProvider;
 import com.musicallcommunity.musicallback.model.Role;
-import com.musicallcommunity.musicallback.model.RoleName;
-import com.musicallcommunity.musicallback.model.User;
-import com.musicallcommunity.musicallback.repository.RoleRepository;
 import com.musicallcommunity.musicallback.repository.UserRepository;
 import com.musicallcommunity.musicallback.security.TokenProvider;
 import com.musicallcommunity.musicallback.service.AuthenticationService;
@@ -20,11 +19,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service(value = "authenticationService")
 public class AuthenticationServiceImpl implements AuthenticationService{
@@ -35,16 +35,10 @@ public class AuthenticationServiceImpl implements AuthenticationService{
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
     private UserService userService;
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private RoleRepository roleRepository;
 
     @Autowired
     private TokenProvider tokenProvider;
@@ -56,31 +50,33 @@ public class AuthenticationServiceImpl implements AuthenticationService{
      * @return String Token
      */
     @Override
-    public String authenticateJwt(SignInRequest signInRequest) throws ResourceNotFoundException {
+    public LoginResponse authenticateJwt(SignInRequest signInRequest) throws ResourceNotFoundException {
         LOGGER.info("New user attempting to sign in");
         if (userRepository.findByMail(signInRequest.getMail()) == null) {
             throw new ResourceNotFoundException("User", "mail", signInRequest.getMail());
         }
         Collection<Role> roles = userRepository.findByMail(signInRequest.getMail()).getRoles();
+
+        /*List privileges = userRepository.findByMail(signInRequest.getMail()).getRoles().stream().map(Role::getPrivileges).filter(Objects::nonNull)
+                .collect(Collectors.toList());
+        LOGGER.info("test roles : " + privileges);*/
+
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signInRequest.getMail(), signInRequest.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        return tokenProvider.createToken(authentication, roles);
+        String token = tokenProvider.createToken(authentication, roles);
+        UserDto userDto = userService.fetchUserAfterAuth(signInRequest.getMail());
+        LoginResponse response = new LoginResponse(userDto,token);
+        return response;
     }
 
     @Override
-    public User signUp(SignUpRequest signup) throws AlreadyExistException, ResourceNotFoundException {
+    public LoginResponse signUp(SignUpRequest signup) throws AlreadyExistException, ResourceNotFoundException {
         if (userRepository.findByMail(signup.getMail()) != null) {
             LOGGER.info("Unable to create. A User with username {} already exists", signup.getMail());
             throw new AlreadyExistException("User", "email", signup.getMail());
         }
-        User user = new User(signup);
-        Role userRole = roleRepository.findByName(RoleName.USER_ROLE).
-                orElseThrow(() -> new ResourceNotFoundException("Role", "name", RoleName.USER_ROLE));
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles(Arrays.asList(userRole));
-        user.setEnabled(true);
-        user.setProvider(AuthProvider.local);
-        user.setProviderId("local_ID");
-        return userService.save(user);
+        userService.createUser(signup);
+        SignInRequest signin = new SignInRequest(signup.getMail(), signup.getPassword());
+        return authenticateJwt(signin);
     }
 }

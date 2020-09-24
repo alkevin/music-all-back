@@ -1,12 +1,11 @@
 package com.musicallcommunity.musicallback.config;
 
-import com.musicallcommunity.musicallback.config.AppProperties;
+import com.google.common.collect.ImmutableList;
 import com.musicallcommunity.musicallback.security.CustomAuthenticationProvider;
 import com.musicallcommunity.musicallback.security.CustomUserDetailsService;
 import com.musicallcommunity.musicallback.security.RestAuthenticationEntryPoint;
 import com.musicallcommunity.musicallback.security.TokenAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,8 +21,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import java.util.Objects;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
@@ -95,6 +95,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .disable()
                 .httpBasic()
                 .disable()
+
                 .exceptionHandling()
                 .authenticationEntryPoint(unauthorizedHandler)
                 .and()
@@ -113,9 +114,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/auth/**", "/h2-console/**", appProperties.getH2().getPath()+"/**", "/webjars/**", "/api/password/**")
                 .permitAll()
                 .antMatchers("/api/auth/signin").permitAll()
+                .antMatchers("/v2/api-docs/**").permitAll()
+                .antMatchers("/swagger-ui.html/**").permitAll()
+                .antMatchers("/swagger-resources/**").permitAll()
                 //.antMatchers("/api/translate").permitAll()
-                .antMatchers("/api/admin/users/**").hasAuthority("WRITE_PRIVILEGE")
-                .antMatchers("/api/user/profile/**").hasAuthority("READ_PRIVILEGE")
+                .antMatchers("/api/admin/**").hasAuthority("WRITE_PRIVILEGE")
+                .antMatchers("/api/user/**").hasAuthority("READ_PRIVILEGE")
                 .anyRequest()
                 .authenticated();
 
@@ -123,4 +127,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(jwtFilter(customUserDetailsService), UsernamePasswordAuthenticationFilter.class);
     }
 
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        final CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(ImmutableList.of("*"));
+        configuration.setAllowedMethods(ImmutableList.of("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH"));
+        configuration.setAllowCredentials(true);
+        configuration.setAllowedHeaders(ImmutableList.of("Authorization", "Cache-Control", "Content-Type"));
+        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/api/**", configuration);
+        return source;
+    }
 }

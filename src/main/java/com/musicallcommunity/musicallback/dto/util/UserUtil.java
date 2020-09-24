@@ -12,12 +12,15 @@ public class UserUtil {
             return null;
         }
 
-        return UserDto.UserDtoBuilder.builder().firstName(user.getFirstName())
+        return UserDto.UserDtoBuilder.builder()
+                .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .mail((user.getMail()))
+                .profile(ProfileUtil.toProfile(user.getProfile()))
                 .roles(RoleUtil.toRoles(user.getRoles()))
-                .provider((user.getProvider()))
-                .providerId(user.getProviderId())
+                .friends(UserFriendUtil.toUserFriends(user.getUserFriends()))
+                .conversations(ConversationUtil.toConversations(user.getConversations()))
+                .connected(user.getConnected())
                 .build();
     }
 
