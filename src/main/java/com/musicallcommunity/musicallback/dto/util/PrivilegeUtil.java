@@ -14,7 +14,8 @@ public class PrivilegeUtil {
             return null;
         }
 
-        return PrivilegeDto.PrivilegeDtoBuilder.builder().name(privilege.getName().name()).build();
+        return PrivilegeDto.PrivilegeDtoBuilder.builder()
+                .name(privilege.getName().name()).build();
     }
 
     public static List<PrivilegeDto> toPrivileges(final Collection<Privilege> privileges) {

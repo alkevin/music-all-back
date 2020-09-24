@@ -5,6 +5,7 @@ import com.musicallcommunity.musicallback.exception.AlreadyExistException;
 import com.musicallcommunity.musicallback.exception.ForbiddenException;
 import com.musicallcommunity.musicallback.exception.ResourceNotFoundException;
 import com.musicallcommunity.musicallback.model.User;
+import com.musicallcommunity.musicallback.payload.SignUpRequest;
 
 import java.util.List;
 
@@ -20,11 +21,11 @@ public interface UserService {
 
     User save(User user) throws AlreadyExistException;
 
+    User createUser(SignUpRequest signup) throws AlreadyExistException;
+
     void delete(Long id);
 
-    User updateUser(User user, UserDto current) throws ResourceNotFoundException;
-
-    User updateProfile(Long id, UserDto current) throws ResourceNotFoundException;
+    User updateUser(Long id, UserDto current) throws ResourceNotFoundException;
 
     void createPasswordResetTokenForUser(User user, String token);
 
@@ -37,5 +38,11 @@ public interface UserService {
     boolean isUserExist(String mail) throws ResourceNotFoundException;
 
     boolean isAdmin(Long id,String mail) throws ResourceNotFoundException;
+
+    UserDto fetchUserAfterAuth(String mail) throws ResourceNotFoundException;
+
+    User connectUser(User user) throws ResourceNotFoundException;
+
+    User disconnectUser(User user) throws ResourceNotFoundException;
 
 }

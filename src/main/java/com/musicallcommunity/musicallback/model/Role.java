@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "role")
 public class Role implements GrantedAuthority {
 
     @Id
@@ -23,7 +23,7 @@ public class Role implements GrantedAuthority {
     private Collection<User> users;
 
     @ManyToMany
-    @JoinTable(name = "roles_privileges",
+    @JoinTable(name = "role_privilege",
             joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "privilege_id", referencedColumnName = "id"))
     private Collection<Privilege> privileges;

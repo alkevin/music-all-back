@@ -1,9 +1,6 @@
 package com.musicallcommunity.musicallback.dto;
 
-import com.musicallcommunity.musicallback.model.AuthProvider;
 import com.musicallcommunity.musicallback.validation.ValidEmail;
-import com.musicallcommunity.musicallback.validation.ValidPassword;
-
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -24,12 +21,15 @@ public class UserDto {
     @Size(min = 1, message = "{Size.userDto.email}")
     private String mail;
 
+    private ProfileDto profile;
+
     private List<RoleDto> roles;
 
-    private AuthProvider provider;
+    private boolean connected;
 
-    private String providerId;
+    private List<UserFriendDto> friends;
 
+    private List<ConversationDto> conversations;
 
     public String getFirstName() {
         return firstName;
@@ -59,29 +59,37 @@ public class UserDto {
 
     public void setRoles(List<RoleDto> roles) { this.roles = roles; }
 
-    public AuthProvider getProvider() {
-        return provider;
+    public boolean getConnected() {
+        return connected;
     }
 
-    public void setProvider(AuthProvider provider) {
-        this.provider = provider;
+    public void setConnected(boolean connected) {
+        this.connected = connected;
     }
 
-    public String getProviderId() {
-        return providerId;
+    public List<UserFriendDto> getUserFriends() {
+        return friends;
     }
 
-    public void setProviderId(String providerId) {
-        this.providerId = providerId;
-
+    public void setUserFriends(List<UserFriendDto> friends) {
+        this.friends = friends;
     }
+
+    public List<ConversationDto> getConversations() { return conversations; }
+
+    public void setConversations(List<ConversationDto> conversations) { this.conversations = conversations; }
+
+    public ProfileDto getProfile() { return profile; }
+
+    public void setProfile(ProfileDto profile) { this.profile = profile; }
+
+    public boolean isConnected() { return connected; }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("UserDto [firstName=").append(firstName).append(", lastName=").append(lastName)
-                .append(", mail=").append(mail).append(", roles=").append(roles).append(", provider=").append(provider)
-                .append(", providerId=").append(providerId).append("]");
+                .append(", mail=").append(mail).append(", roles=").append(roles).append("]");
         return builder.toString();
     }
 
@@ -111,18 +119,28 @@ public class UserDto {
             return this;
         }
 
+        public UserDtoBuilder profile(ProfileDto profile) {
+            userDto.setProfile(profile);
+            return this;
+        }
+
         public UserDtoBuilder roles(List<RoleDto> roles) {
             userDto.setRoles(roles);
             return this;
         }
 
-        public UserDtoBuilder provider(AuthProvider provider) {
-            userDto.setProvider(provider);
+        public UserDtoBuilder friends(List<UserFriendDto> friends) {
+            userDto.setUserFriends(friends);
             return this;
         }
 
-        public UserDtoBuilder providerId(String providerId) {
-            userDto.setProviderId(providerId);
+        public UserDtoBuilder conversations(List<ConversationDto> conversations) {
+            userDto.setConversations(conversations);
+            return this;
+        }
+
+        public UserDtoBuilder connected(boolean connected) {
+            userDto.setConnected(connected);
             return this;
         }
 
