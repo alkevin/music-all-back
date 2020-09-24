@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "privileges")
+@Table(name = "privilege")
 public class Privilege {
 
     @Id

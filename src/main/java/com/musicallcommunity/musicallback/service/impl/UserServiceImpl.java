@@ -4,11 +4,10 @@ import com.musicallcommunity.musicallback.dto.UserDto;
 import com.musicallcommunity.musicallback.dto.util.UserUtil;
 import com.musicallcommunity.musicallback.exception.ForbiddenException;
 import com.musicallcommunity.musicallback.exception.ResourceNotFoundException;
-import com.musicallcommunity.musicallback.model.PasswordResetToken;
-import com.musicallcommunity.musicallback.model.Role;
-import com.musicallcommunity.musicallback.model.RoleName;
-import com.musicallcommunity.musicallback.model.User;
+import com.musicallcommunity.musicallback.model.*;
+import com.musicallcommunity.musicallback.payload.SignUpRequest;
 import com.musicallcommunity.musicallback.repository.PasswordResetTokenRepository;
+import com.musicallcommunity.musicallback.repository.ProfileRepository;
 import com.musicallcommunity.musicallback.repository.RoleRepository;
 import com.musicallcommunity.musicallback.repository.UserRepository;
 import com.musicallcommunity.musicallback.service.UserService;
@@ -18,9 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service(value = "userService")
 public class UserServiceImpl implements UserService {
@@ -31,15 +28,19 @@ public class UserServiceImpl implements UserService {
 
     private RoleRepository roleRepository;
 
+    private ProfileRepository profileRepository;
+
     private PasswordResetTokenRepository passwordTokenRepository;
 
     private PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository
-            , PasswordResetTokenRepository passwordTokenRepository, PasswordEncoder passwordEncoder) {
+            , ProfileRepository profileRepository, PasswordResetTokenRepository passwordTokenRepository
+            , PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.profileRepository = profileRepository;
         this.passwordTokenRepository = passwordTokenRepository;
         this.passwordEncoder = passwordEncoder;
     }
@@ -82,40 +83,41 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(user);
     }
 
-    /**
-     * Update user information by admin
-     * @param userToUpdate
-     * @param current
-     * @return
-     * @throws ResourceNotFoundException
-     */
     @Override
-    public User updateUser(User userToUpdate, UserDto current) throws ResourceNotFoundException {
-
-        /**
-         * We need to insert a business code here
-         */
-        if (getById(userToUpdate.getId()) == null){
-            throw new ResourceNotFoundException("User", "id", userToUpdate.getId());
-        }
-        userToUpdate.setFirstName(current.getFirstName());
-        userToUpdate.setLastName(current.getLastName());
-        userToUpdate.setModificationDate(new Date());
-        return userRepository.save(userToUpdate);
+    public User createUser(SignUpRequest signup) {
+        LOGGER.info("Creating user : " + signup.toString());
+        Profile profileTransient = new Profile();
+        Profile profile = profileRepository.save(profileTransient);
+        User user = new User(signup);
+        Role userRole = roleRepository.findByName(RoleName.USER_ROLE).
+                orElseThrow(() -> new ResourceNotFoundException("Role", "name", RoleName.USER_ROLE));
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setProfileId(profile.getId());
+        user.setRoles(Collections.singletonList(userRole));
+        user.setEnabled(true);
+        user.setProfile(profile);
+        user.setUserFriends(new LinkedHashSet<>());
+        user.setConversations(new ArrayList<>());
+        connectUser(user);
+        return save(user);
     }
 
     /**
-     * Update the user profile
+     * Update the user
      * @param id
      * @param current
      * @return
      * @throws ResourceNotFoundException
      */
     @Override
-    public User updateProfile(Long id, UserDto current) throws ResourceNotFoundException {
+    public User updateUser(Long id, UserDto current) throws ResourceNotFoundException {
         User existingUser = userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User", "id", id));
+
         existingUser.setFirstName(current.getFirstName());
         existingUser.setLastName(current.getLastName());
+        existingUser.setProfile(existingUser.getProfile());
+        existingUser.setUserFriends(existingUser.getUserFriends());
+        existingUser.setConversations(existingUser.getConversations());
         existingUser.setModificationDate(new Date());
         return userRepository.save(existingUser);
     }
@@ -175,6 +177,22 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto fetchUserAfterAuth(String mail) throws ResourceNotFoundException {
         User user = getByMail(mail);
-        return UserUtil.toUser(user);
+        connectUser(user);
+        UserDto userDto = UserUtil.toUser(user);
+        return userDto;
+    }
+
+    @Override
+    public User connectUser(User user) throws ResourceNotFoundException {
+        LOGGER.info("Connecting user : " + user.toString());
+        user.setConnected(true);
+        return user;
+    }
+
+    @Override
+    public User disconnectUser(User user) throws ResourceNotFoundException {
+        LOGGER.info("Disconnecting user : " + user.toString());
+        user.setConnected(false);
+        return user;
     }
 }

@@ -39,6 +39,7 @@ public class TokenProvider {
         logger.info("claims : " + claims);
         return Jwts.builder()
                 .setSubject(userPrincipal.getMail())
+                .setClaims(claims)
                 .setIssuedAt(new Date())
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, appProperties.getAuth().getJwtSecret())

@@ -14,6 +14,26 @@ spring:
     password: ${DB_PASSWORD_PROD}
     initialization-mode: always
     platform: ${DB_PLATFORM_PROD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    protocol: ${MAIL_PTL}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        transport:
+          protocol: ${MAIL_PTL}
+        smtp:
+          starttls:
+            enable: ${MAIL_PTL_EBLE}
+            required: ${MAIL_PTL_EBLE}
+          auth: ${MAIL_PTL_EBLE}
+          connectiontimeout: ${MAIL_CNT_TMOUT}
+          timeout: ${MAIL_CNT_TMOUT}
+          writetimeout: ${MAIL_CNT_TMOUT}
 
   jpa:
     show-sql: true

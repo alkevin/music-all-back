@@ -18,14 +18,14 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.musicallcommunity.musicallback"))
-                .paths(PathSelectors.regex("/emotion/api.*"))
+                .paths(PathSelectors.regex("/api.*"))
                 .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder().title("Music'All API")
                 .description("Musci'All API reference for developers")
-                .termsOfServiceUrl("http://localhost:8080/v2/api-docs").license("License")
+                .termsOfServiceUrl("http://localhost:5000/v2/api-docs").license("License")
                 .licenseUrl("").version("1.0").build();
     }
 }
