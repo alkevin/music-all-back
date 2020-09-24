@@ -1,0 +1,1285 @@
+{
+	"info": {
+		"_postman_id": "5f280bb7-fe9a-4386-b5aa-55d395566e0b",
+		"name": "Music'All",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "BACK",
+			"item": [
+				{
+					"name": "auth",
+					"item": [
+						{
+							"name": "signup",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "en",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t\"firstName\": \"Foo7\",\r\n    \"lastName\": \"Bar7\",\r\n    \"mail\": \"kevin.alvespinto@gmail.com\",\r\n    \"password\": \"password\",\r\n    \"matchingPassword\" : \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://music-all-back.herokuapp.com/api/auth/signup",
+									"protocol": "https",
+									"host": [
+										"music-all-back",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "signin",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"mail\": \"jean.luc@test.com\",\n    \"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://music-all-back.herokuapp.com/api/auth/signin",
+									"protocol": "https",
+									"host": [
+										"music-all-back",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"auth",
+										"signin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqZWFuLmx1Y0B0ZXN0LmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJBRE1JTl9ST0xFIn1dLCJpYXQiOjE2MDA3MTQxNDcsImV4cCI6MTYwMTU3ODE0N30.ZIpjt7i_sZ6QELgVnwG0Ga0eZW8VqP4wajPwXJFqZM8gC3uBVISV4E5VIzAiK-y87c7h7QfzyEf3SnKt_bcFuQ",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://music-all-back.herokuapp.com/api/auth/logout",
+									"protocol": "https",
+									"host": [
+										"music-all-back",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "password",
+					"item": [
+						{
+							"name": "getByMail",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"mail\": \"kevin.alvespinto@gmail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://music-all-back.herokuapp.com/api/password",
+									"protocol": "https",
+									"host": [
+										"music-all-back",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"password"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "forgotPassword",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"mail\": \"kevin.alvespinto@gmail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://music-all-back.herokuapp.com/api/password/forgot",
+									"protocol": "https",
+									"host": [
+										"music-all-back",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"password",
+										"forgot"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "validateForgotPassword",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://music-all-back.herokuapp.com/api/password/validate?id=3&token=90b8a9ed-5ac2-469e-985c-1cbaf6828308",
+									"protocol": "https",
+									"host": [
+										"music-all-back",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"password",
+										"validate"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "3"
+										},
+										{
+											"key": "token",
+											"value": "90b8a9ed-5ac2-469e-985c-1cbaf6828308"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "saveAfterValidate",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"password\": \"test\" \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://music-all-back.herokuapp.com/api/password/save?id=3&token=90b8a9ed-5ac2-469e-985c-1cbaf6828308",
+									"protocol": "https",
+									"host": [
+										"music-all-back",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"password",
+										"save"
+									],
+									"query": [
+										{
+											"key": "id",
+											"value": "3"
+										},
+										{
+											"key": "token",
+											"value": "90b8a9ed-5ac2-469e-985c-1cbaf6828308"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "admin",
+					"item": [
+						{
+							"name": "user",
+							"item": [
+								{
+									"name": "getAll",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqZWFuLmx1Y0B0ZXN0LmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJBRE1JTl9ST0xFIn1dLCJpYXQiOjE2MDA4ODY1ODUsImV4cCI6MTYwMTc1MDU4NX0.64jTbSckTBTXxmYhzbKDJIMBIRIqOgsdUF9DAh64yVsZZHnHhrT3HhR1Ai4AfGxgzyq2WsTHSvg2eeEJIXv3xw",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://music-all-back.herokuapp.com/api/admin/users",
+											"protocol": "https",
+											"host": [
+												"music-all-back",
+												"herokuapp",
+												"com"
+											],
+											"path": [
+												"api",
+												"admin",
+												"users"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "GetById",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqZWFuLmx1Y0B0ZXN0LmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJBRE1JTl9ST0xFIn1dLCJpYXQiOjE2MDA4Njc5MTIsImV4cCI6MTYwMTczMTkxMn0.MbxB2yVJsITcxobvo0QqEEYjQVZK66dNVbOP1gND3A6mcxooI3hZ51sDdOFFRUYbbopnMY8pIsWR_0QPQ_7EPg",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://music-all-back.herokuapp.com/api/admin/users/7",
+											"protocol": "https",
+											"host": [
+												"music-all-back",
+												"herokuapp",
+												"com"
+											],
+											"path": [
+												"api",
+												"admin",
+												"users",
+												"7"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "updateById",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqZWFuLmx1Y0B0ZXN0LmNvbSIsImlhdCI6MTU4OTgxNjcwNCwiZXhwIjoxNTkwNjgwNzA0fQ.f8OUbkyzHcGXWWVUA8BXZ59on7OLk3uJkOQJMuqltJiX7Rz_vBmP5O-XDkNHoEDVkcQ8lVGSdE6fk00EjBAimg",
+													"type": "string"
+												}
+											]
+										},
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json;charset=UTF-8",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n\t\"firstName\" : \"Jean\",\n\t\"lastName\" : \"Toto\",\n\t\"mail\" : \"jean.luc@test.com\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://music-all-back.herokuapp.com/api/admin/users/1",
+											"protocol": "https",
+											"host": [
+												"music-all-back",
+												"herokuapp",
+												"com"
+											],
+											"path": [
+												"api",
+												"admin",
+												"users",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "deleteById",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqZWFuLmx1Y0B0ZXN0LmNvbSIsImlhdCI6MTU4OTgxNjcwNCwiZXhwIjoxNTkwNjgwNzA0fQ.f8OUbkyzHcGXWWVUA8BXZ59on7OLk3uJkOQJMuqltJiX7Rz_vBmP5O-XDkNHoEDVkcQ8lVGSdE6fk00EjBAimg",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://music-all-back.herokuapp.com/api/admin/users/3",
+											"protocol": "https",
+											"host": [
+												"music-all-back",
+												"herokuapp",
+												"com"
+											],
+											"path": [
+												"api",
+												"admin",
+												"users",
+												"3"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "instrument",
+							"item": [
+								{
+									"name": "getById",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqZWFuLmx1Y0B0ZXN0LmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJBRE1JTl9ST0xFIn1dLCJpYXQiOjE2MDA3NzQ3MDcsImV4cCI6MTYwMTYzODcwN30.FKumv7MJLu6oKLPHp85M2-9KycArn6O7oyDAB4cSFuBbyudDpJW4Z_qwghUqoVj2jtsHpKAn7BWcOSaE6mCddQ",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://music-all-back.herokuapp.com/api/admin/instrument/?instrumentId=5",
+											"protocol": "https",
+											"host": [
+												"music-all-back",
+												"herokuapp",
+												"com"
+											],
+											"path": [
+												"api",
+												"admin",
+												"instrument",
+												""
+											],
+											"query": [
+												{
+													"key": "instrumentId",
+													"value": "5"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "postInstrument",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqZWFuLmx1Y0B0ZXN0LmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJBRE1JTl9ST0xFIn1dLCJpYXQiOjE2MDA3NzQ3MDcsImV4cCI6MTYwMTYzODcwN30.FKumv7MJLu6oKLPHp85M2-9KycArn6O7oyDAB4cSFuBbyudDpJW4Z_qwghUqoVj2jtsHpKAn7BWcOSaE6mCddQ",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\" : \"toto\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "https://music-all-back.herokuapp.com/api/admin/instrument/",
+											"protocol": "https",
+											"host": [
+												"music-all-back",
+												"herokuapp",
+												"com"
+											],
+											"path": [
+												"api",
+												"admin",
+												"instrument",
+												""
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "deleteInstrumentById",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqZWFuLmx1Y0B0ZXN0LmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJBRE1JTl9ST0xFIn1dLCJpYXQiOjE2MDA3NzQ3MDcsImV4cCI6MTYwMTYzODcwN30.FKumv7MJLu6oKLPHp85M2-9KycArn6O7oyDAB4cSFuBbyudDpJW4Z_qwghUqoVj2jtsHpKAn7BWcOSaE6mCddQ",
+													"type": "string"
+												}
+											]
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "https://music-all-back.herokuapp.com/api/admin/instrument/delete?instrumentId=59",
+											"protocol": "https",
+											"host": [
+												"music-all-back",
+												"herokuapp",
+												"com"
+											],
+											"path": [
+												"api",
+												"admin",
+												"instrument",
+												"delete"
+											],
+											"query": [
+												{
+													"key": "instrumentId",
+													"value": "59"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "level",
+							"item": [
+								{
+									"name": "getById",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqZWFuLmx1Y0B0ZXN0LmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJBRE1JTl9ST0xFIn1dLCJpYXQiOjE2MDA3MzI4MjcsImV4cCI6MTYwMTU5NjgyN30.hjQOaLGGXwudlo4wWWxX8OJLXkIfdJQ_uGgopN_zqNGhigciR6ye_pjX1jNDTP4mqJiHD-XdF3KmIfUhPUINxw",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://music-all-back.herokuapp.com/api/admin/level/?levelId=1",
+											"protocol": "https",
+											"host": [
+												"music-all-back",
+												"herokuapp",
+												"com"
+											],
+											"path": [
+												"api",
+												"admin",
+												"level",
+												""
+											],
+											"query": [
+												{
+													"key": "levelId",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "profile",
+							"item": [
+								{
+									"name": "getAll",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqZWFuLmx1Y0B0ZXN0LmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJBRE1JTl9ST0xFIn1dLCJpYXQiOjE2MDA4MDEzMDksImV4cCI6MTYwMTY2NTMwOX0.1NDPq4LGm9zTtd0UdddlIt0hPZ1Id5pt1ZujohIumNvvlkgw7PN9S0GI01dBk8Toq7quVC4G3dX1b-zXVfGaTw",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "https://music-all-back.herokuapp.com/api/admin/profile/",
+											"protocol": "https",
+											"host": [
+												"music-all-back",
+												"herokuapp",
+												"com"
+											],
+											"path": [
+												"api",
+												"admin",
+												"profile",
+												""
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "profile",
+					"item": [
+						{
+							"name": "get",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrZXZpbi5hbHZlc3BpbnRvQGdtYWlsLmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJVU0VSX1JPTEUifV0sImlhdCI6MTYwMDkwNTQ0MCwiZXhwIjoxNjAxNzY5NDQwfQ.MCJm2W-WjH7-gGA9HOpaSNa5CWvj96AZbTzGLmiJXoi6zRFAFvVriEwlHYRjP7YZaRx8Vu5wJocWQNporKUs_w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://music-all-back.herokuapp.com/api/user/profile/me",
+									"protocol": "https",
+									"host": [
+										"music-all-back",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"user",
+										"profile",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateUser",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrZXZpbi5hbHZlc3BpbnRvQGdtYWlsLmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJVU0VSX1JPTEUifV0sImlhdCI6MTYwMDg2NzYyNywiZXhwIjoxNjAxNzMxNjI3fQ.CpxOkzT_J6yIgzgSov8XTMKuW60BOkW6Qr9R-m5C5otShsyfOREikkL6-iqXMnNqMQpkbIFLJdefsN-8aaBgXw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"firstName\" : \"Jean\",\n\t\"lastName\" : \"Toto\",\n\t\"mail\" : \"kevin.alvespinto@gmail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://music-all-back.herokuapp.com/api/user/profile/update-user",
+									"protocol": "https",
+									"host": [
+										"music-all-back",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"user",
+										"profile",
+										"update-user"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateProfile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrZXZpbi5hbHZlc3BpbnRvQGdtYWlsLmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJVU0VSX1JPTEUifV0sImlhdCI6MTYwMDg4ODU2OSwiZXhwIjoxNjAxNzUyNTY5fQ.BX7JBlWNdJ3sekq71i0huYjKGclodAYtEdhzFwBRm2wPzOU_4-T2cmrRaYrma86O5x08oNpjF9An7m32B85f8Q",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"gender\" : \"M\",\n\t\"age\" : \"25\",\n\t\"level\" : {\n        \"id\" : 1,\n        \"name\" : \"AMATEUR\"\n    },\n    \"instruments\" : [\n        {\n           \"id\": 1,\n           \"name\": \"Alto\"\n        },\n        {\n           \"id\": 3,\n           \"name\": \"Basse\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://music-all-back.herokuapp.com/api/user/profile/update-profile",
+									"protocol": "https",
+									"host": [
+										"music-all-back",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"user",
+										"profile",
+										"update-profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrZXZpbi5hbHZlc3BpbnRvQGdtYWlsLmNvbSIsImlhdCI6MTU4OTgyMjE3MywiZXhwIjoxNTkwNjg2MTczfQ.8hKT3Ms_toEUpEZZ317aXsfbyxfKrpBrtxKutS4BKUgti-hvTqY6ALGCxLdvAwwNuOyKZlMSmDg_dMHQgeIj5Q",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://music-all-back.herokuapp.com/api/user/profile/delete",
+									"protocol": "https",
+									"host": [
+										"music-all-back",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"user",
+										"profile",
+										"delete"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update password",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrZXZpbi5hbHZlc3BpbnRvQGdtYWlsLmNvbSIsImlhdCI6MTU4OTgyMjM2OCwiZXhwIjoxNTkwNjg2MzY4fQ.-4y66llGdfGvg_gdSR6Z8H12IaZk-gdPh3zzT3k4Lac9NiyOGHhS6aDYP3wos6sd8XOsd81degQFHtLfSwhQPg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n\t\"oldPassword\" : \"password\",\n\t\"newPassword\" : \"test\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://music-all-back.herokuapp.com/api/user/profile/update-password",
+									"protocol": "https",
+									"host": [
+										"music-all-back",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"user",
+										"profile",
+										"update-password"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "conversation",
+					"item": [
+						{
+							"name": "getByUserId",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrZXZpbi5hbHZlc3BpbnRvQGdtYWlsLmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJVU0VSX1JPTEUifV0sImlhdCI6MTYwMDg4NDU1MywiZXhwIjoxNjAxNzQ4NTUzfQ.cvcu0CjivsTfbsF3OVHudvUO8yRx1mWNxyXFXHfQzXIwBes-UxIUrwGZBWJsk_3jw8lupEdnstIabK-lkYFIZg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://music-all-back.herokuapp.com/api/user/conversation/",
+									"protocol": "https",
+									"host": [
+										"music-all-back",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"user",
+										"conversation",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "message",
+					"item": [
+						{
+							"name": "getByConversationId",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqZWFuLmx1Y0B0ZXN0LmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJBRE1JTl9ST0xFIn1dLCJpYXQiOjE2MDAzNzI0NzcsImV4cCI6MTYwMTIzNjQ3N30.PuSXRefM3ht7qaYC0OpUwiiRWfbN8nsbV2b2KU_M-kwCSDIw3mcUDENQSgafEIRHqn682PCK8jpIUPGkvxhGbg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://music-all-back.herokuapp.com/api/user/conversation/message/?conversationId=1",
+									"protocol": "https",
+									"host": [
+										"music-all-back",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"user",
+										"conversation",
+										"message",
+										""
+									],
+									"query": [
+										{
+											"key": "conversationId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "postMessage",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrZXZpbi5hbHZlc3BpbnRvQGdtYWlsLmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJVU0VSX1JPTEUifV0sImlhdCI6MTYwMDg4ODM0MiwiZXhwIjoxNjAxNzUyMzQyfQ.AmXVq4mGspsbv_arJJwblBvaKIKahF7YVdPTnNtOADyS6lAuLhCFYGhZvLIG5MRNOUwBXqAVXQuKDF4oih3L6w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"content\" : \"Hello !\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://music-all-back.herokuapp.com/api/user/conversation/message/?conversationId=4",
+									"protocol": "https",
+									"host": [
+										"music-all-back",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"user",
+										"conversation",
+										"message",
+										""
+									],
+									"query": [
+										{
+											"key": "conversationId",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "createNewConversation",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrZXZpbi5hbHZlc3BpbnRvQGdtYWlsLmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJVU0VSX1JPTEUifV0sImlhdCI6MTYwMDkwNjYzMywiZXhwIjoxNjAxNzcwNjMzfQ.fy3VJIFJqAxT0jGabUbKOKb5G3iueb_lbtr8IIet8zSqLnsXihCrpBBK4W841eGtVqQ0LdxQIbKawY4M456rnw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"content\" : \"Hello !\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://music-all-back.herokuapp.com/api/user/conversation/new?userIdToContact=4",
+									"protocol": "https",
+									"host": [
+										"music-all-back",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"user",
+										"conversation",
+										"new"
+									],
+									"query": [
+										{
+											"key": "userIdToContact",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "createMessageExistingConversation",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrZXZpbi5hbHZlc3BpbnRvQGdtYWlsLmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJVU0VSX1JPTEUifV0sImlhdCI6MTYwMDkwNTQ0MCwiZXhwIjoxNjAxNzY5NDQwfQ.MCJm2W-WjH7-gGA9HOpaSNa5CWvj96AZbTzGLmiJXoi6zRFAFvVriEwlHYRjP7YZaRx8Vu5wJocWQNporKUs_w",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"content\" : \"Hello !\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://music-all-back.herokuapp.com/api/user/conversation/existing?userIdToContact=4&conversationId=19",
+									"protocol": "https",
+									"host": [
+										"music-all-back",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"user",
+										"conversation",
+										"existing"
+									],
+									"query": [
+										{
+											"key": "userIdToContact",
+											"value": "4"
+										},
+										{
+											"key": "conversationId",
+											"value": "19"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "instrument",
+					"item": [
+						{
+							"name": "getAll",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqZWFuLmx1Y0B0ZXN0LmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJBRE1JTl9ST0xFIn1dLCJpYXQiOjE2MDA3MzI4MjcsImV4cCI6MTYwMTU5NjgyN30.hjQOaLGGXwudlo4wWWxX8OJLXkIfdJQ_uGgopN_zqNGhigciR6ye_pjX1jNDTP4mqJiHD-XdF3KmIfUhPUINxw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://music-all-back.herokuapp.com/api/user/instrument/",
+									"protocol": "https",
+									"host": [
+										"music-all-back",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"user",
+										"instrument",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "level",
+					"item": [
+						{
+							"name": "getAll",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqZWFuLmx1Y0B0ZXN0LmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJBRE1JTl9ST0xFIn1dLCJpYXQiOjE2MDA3MzI4MjcsImV4cCI6MTYwMTU5NjgyN30.hjQOaLGGXwudlo4wWWxX8OJLXkIfdJQ_uGgopN_zqNGhigciR6ye_pjX1jNDTP4mqJiHD-XdF3KmIfUhPUINxw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://music-all-back.herokuapp.com/api/user/level/",
+									"protocol": "https",
+									"host": [
+										"music-all-back",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"user",
+										"level",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "friend",
+					"item": [
+						{
+							"name": "createFriendRequest",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrZXZpbi5hbHZlc3BpbnRvQGdtYWlsLmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJVU0VSX1JPTEUifV0sImlhdCI6MTYwMDg4ODU2OSwiZXhwIjoxNjAxNzUyNTY5fQ.BX7JBlWNdJ3sekq71i0huYjKGclodAYtEdhzFwBRm2wPzOU_4-T2cmrRaYrma86O5x08oNpjF9An7m32B85f8Q",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "https://music-all-back.herokuapp.com/api/user/friend/?friendId=2",
+									"protocol": "https",
+									"host": [
+										"music-all-back",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"user",
+										"friend",
+										""
+									],
+									"query": [
+										{
+											"key": "friendId",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "accepteFriendRequest",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrZXZpbi5hbHZlc3BpbnRvQGdtYWlsLmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJVU0VSX1JPTEUifV0sImlhdCI6MTYwMDg2NzM2MiwiZXhwIjoxNjAxNzMxMzYyfQ._ZI5wzL3JwHRIR97MfGXvvVVYzJawtMI2YbKZw2XHl4g1hRlaWOZhAn6oMiBTcxQXM4LPu01Mc4QHuJoVGBkww",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "https://music-all-back.herokuapp.com/api/user/friend/accepte?friendId=2",
+									"protocol": "https",
+									"host": [
+										"music-all-back",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"user",
+										"friend",
+										"accepte"
+									],
+									"query": [
+										{
+											"key": "friendId",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "blockFriendRequest",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrZXZpbi5hbHZlc3BpbnRvQGdtYWlsLmNvbSIsInJvbGVzIjpbeyJhdXRob3JpdHkiOiJVU0VSX1JPTEUifV0sImlhdCI6MTYwMDg2NzYyNywiZXhwIjoxNjAxNzMxNjI3fQ.CpxOkzT_J6yIgzgSov8XTMKuW60BOkW6Qr9R-m5C5otShsyfOREikkL6-iqXMnNqMQpkbIFLJdefsN-8aaBgXw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "https://music-all-back.herokuapp.com/api/user/friend/block?friendId=2",
+									"protocol": "https",
+									"host": [
+										"music-all-back",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"api",
+										"user",
+										"friend",
+										"block"
+									],
+									"query": [
+										{
+											"key": "friendId",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
